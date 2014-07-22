@@ -153,6 +153,10 @@
 		API.output(str);
 	};
 
+	API.Human.prototype.sleep = function() {
+		output(_.template('${name} is going to sleep. Slaap lekker ${name}!', {'name': this.name}));
+	}
+
 	// Expose API's content to root element (global)
 	for (var name in API) {
 		if (API.hasOwnProperty(name)) {
