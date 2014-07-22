@@ -64,7 +64,7 @@
 			var code = _editor.getValue();
 
 			// Compile coffeescript and evaluate
-			console.log(CoffeeScript.compile(code));
+			//console.log(CoffeeScript.compile(code));
 			CoffeeScript.eval(code);
 
 			// Run inital step, if present
