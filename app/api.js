@@ -4,6 +4,7 @@
 	var root          = this,
 	    API           = {},
 	    _steps        = {},
+	    _choices      = {},
 	    _outputBuffer = '',
 	    _output;
 
@@ -19,13 +20,7 @@
 	};
 
 	API.step = function(name, fn) {
-		//setTimeout(function() {
-			_steps[name] = fn;
-
-			if (name == 'initial') {
-				API.doStep(name);
-			}
-		//} , 1500);
+		_steps[name] = fn;
 	};
 
 	API.doStep = function(name) {
@@ -34,6 +29,57 @@
 		} else {
 			console.log('Step ' + name + ' undefined');
 		}
+	};
+
+	API.pressAnyKey = function(fn) {
+		if (typeof fn != 'function') fn = function() {};
+
+		output("Press any key..");
+		var onKeyDown = function(e) {
+			e.preventDefault();
+			root.removeEventListener('keyup', onKeyDown);
+
+			fn();
+			flushOutput();
+		};
+
+		root.addEventListener('keyup', onKeyDown);
+	};
+
+	API.ask = function(question) {
+		return prompt(question);
+	};
+
+	API.choices = function(name, arr, fn) {
+		if (typeof fn != 'function') fn = function() {};
+
+		if (!(arr instanceof Array)) {
+			console.log('choices is not an array');
+		} else {
+			for (var i = 0; i < arr.length; i++) {
+				API.output(_.template("${no} - ${choice}", {'no': (i + 1), 'choice': arr[i]}));
+			}
+		}
+
+		var onChoice = function(e) {
+			e.preventDefault();
+
+			var key    = e.keyCode || e.which;
+			var no     = key - 48;
+
+			if (!arr[no - 1]) return;
+
+			var choice = arr[no - 1];
+
+			root.removeEventListener('keyup', onChoice);
+
+			_choices[name] = [no, choice];
+
+			fn(no, choice);
+			flushOutput();
+		};
+
+		root.addEventListener('keyup', onChoice);
 	};
 
 	// Output function to add output to buffer
@@ -49,6 +95,8 @@
 	API.resetOutputBuffer = function() {
 		_outputBuffer = '';
 	};
+
+	API.clr = API.resetOutputBuffer;
 
 	// Action class
 	API.Action = function(str) {

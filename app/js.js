@@ -18,7 +18,8 @@
 					keyMap: 'sublime',
 					tabSize: 2,
 					lineNumbers: true,
-					autofocus: true
+					autofocus: true,
+					indentWithTabs: true
 				});
 
 				if (root.location.hash) {
@@ -63,7 +64,11 @@
 			var code = _editor.getValue();
 
 			// Compile coffeescript and evaluate
+			console.log(CoffeeScript.compile(code));
 			CoffeeScript.eval(code);
+
+			// Run inital step, if present
+			doStep('initial');
 		} catch (e) {
 			output('Error..');
 			console.log(e.message);
