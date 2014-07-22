@@ -39,7 +39,7 @@
 		_menu = React.createClass({
 			render: function() {
 				return React.DOM.ul({className: 'nav navbar-nav'},
-					React.DOM.li({}, React.DOM.a({id: 'btn-run', href: '#'}, 'Run!'))
+					React.DOM.li({}, React.DOM.a({id: 'btn-run', href: '#'}, [React.DOM.span({'className': 'glyphicon glyphicon-play'}), ' Run!']))
 				);
 			},
 			componentDidMount: function() {
