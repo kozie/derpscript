@@ -19,16 +19,20 @@
 	};
 
 	API.step = function(name, fn) {
-		_steps[name] = fn;
+		//setTimeout(function() {
+			_steps[name] = fn;
 
-		if (name == 'initial') {
-			API.doStep(name);
-		}
+			if (name == 'initial') {
+				API.doStep(name);
+			}
+		//} , 1500);
 	};
 
 	API.doStep = function(name) {
 		if (name in _steps) {
 			(_steps[name])();
+		} else {
+			console.log('Step ' + name + ' undefined');
 		}
 	};
 
@@ -47,11 +51,62 @@
 	};
 
 	// Action class
-	API.Action = function() {
-		return 0;
+	API.Action = function(str) {
+		this.text = str;
 	};
 
 	API.Action.prototype.constructor = API.Action;
+
+	API.Action.prototype.append = function(str) {
+		this.text = this.text + ' ' + str;
+
+		return this;
+	};
+
+	API.Action.prototype.getStr = function(object) {
+		var str = '';
+		if (typeof object == 'object') {
+			str = object.str();
+		} else {
+			str = object;
+		}
+
+		return str;
+	};
+
+	API.Action.prototype.in = function(object) {
+		var str = this.getStr(object);
+		return this.append('in ' + str);
+	};
+
+	API.Action.prototype.on = function(object) {
+		var str = this.getStr(object);
+		return this.append('on ' + str);
+	};
+
+	API.Action.prototype.over = function(object) {
+		var str = this.getStr(object);
+		return this.append('over ' + str);
+	};
+
+	API.Action.prototype.out = function(object) {
+		var str = this.getStr(object);
+		return this.append('out ' + str);
+	};
+
+	API.Action.prototype.from = function(object) {
+		var str = this.getStr(object);
+		return this.append('from ' + str);
+	};
+
+	API.Action.prototype.with = function(object) {
+		var str = this.getStr(object);
+		return this.append('with ' + str);
+	};
+
+	API.Action.prototype.end = function() {
+		API.output(this.text);
+	};
 
 	// Animal class
 	API.Animal = function(type) {
@@ -60,7 +115,7 @@
 
 	API.Animal.prototype.constructor = API.Animal;
 
-	API.Animal.prototype.getType = function() {
+	API.Animal.prototype.str = function() {
 		return this.type;
 	};
 
@@ -72,18 +127,29 @@
 	// human constructor
 	API.Human.prototype.constructor = API.Human;
 
-	// Human::getName
-	API.Human.prototype.getName = function() {
+	API.Human.prototype.str = function() {
 		return this.name;
 	};
 
 	API.Human.prototype.put = function(object) {
+		var str = '';
+		if (typeof object == 'object') {
+			str = object.str();
+		} else {
+			str = object;
+		}
 
+		return new API.Action(this.name + ' puts ' + str);
+	};
+
+	API.Human.prototype.part = function(str) {
+		return _.template("${ self }'s ${ part }", {'self': this.name, 'part': str});
 	};
 
 	// Human::interactWith
-	API.Human.prototype.interactWith = function(other) {
-		var str = _.template('${ self } is doing something with ${ theOther }', {'self': this.name, 'theOther': other.getName()});
+	API.Human.prototype.interactWith = function(other, wut) {
+		if (wut === undefined) wut = 'it';
+		var str = _.template('${ self } is doing '+ wut +' with ${ theOther }', {'self': this.name, 'theOther': other.name});
 		API.output(str);
 	};
 

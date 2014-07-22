@@ -8,5 +8,17 @@ html, body {
 
 .editor-container .CodeMirror {
 	border-radius: 6px;
-	height: 100%;
+	height: 750px;
+	font-family: 'Source Code Pro', monospace;
+	font-weight: 300;
+}
+
+.navbar-brand {
+	font-family: 'Arvo', serif;
+	font-weight: 700;
+}
+
+pre {
+	font-family: 'Source Code Pro', monospace;
+	font-weight: 300;
 }

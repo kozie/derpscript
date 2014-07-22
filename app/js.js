@@ -61,10 +61,9 @@
 
 		try {
 			var code = _editor.getValue();
-			//eval(code);
 
 			// Compile coffeescript and evaluate
-			// ..
+			CoffeeScript.eval(code);
 		} catch (e) {
 			output('Error..');
 			console.log(e.message);
