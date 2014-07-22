@@ -13,7 +13,7 @@
 			},
 			componentDidMount: function() {
 				_editor = CodeMirror.fromTextArea(root.document.getElementById('editor'), {
-					mode: 'javascript',
+					mode: 'coffeescript',
 					theme: 'paraiso-dark',
 					keyMap: 'sublime',
 					tabSize: 2,
@@ -61,7 +61,10 @@
 
 		try {
 			var code = _editor.getValue();
-			eval(code);
+			//eval(code);
+
+			// Compile coffeescript and evaluate
+			// ..
 		} catch (e) {
 			output('Error..');
 			console.log(e.message);

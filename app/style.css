@@ -1,8 +1,12 @@
+html, body {
+	height: 100%;
+}
+
 .main {
 	margin-top: 1em;
 }
 
 .editor-container .CodeMirror {
 	border-radius: 6px;
-	height: 900px;
+	height: 100%;
 }

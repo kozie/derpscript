@@ -3,6 +3,7 @@
 
 	var root          = this,
 	    API           = {},
+	    _steps        = {},
 	    _outputBuffer = '',
 	    _output;
 
@@ -15,6 +16,20 @@
 				return React.DOM.pre({id: 'output'}, _outputBuffer);
 			}
 		});
+	};
+
+	API.step = function(name, fn) {
+		_steps[name] = fn;
+
+		if (name == 'initial') {
+			API.doStep(name);
+		}
+	};
+
+	API.doStep = function(name) {
+		if (name in _steps) {
+			(_steps[name])();
+		}
 	};
 
 	// Output function to add output to buffer
@@ -31,6 +46,24 @@
 		_outputBuffer = '';
 	};
 
+	// Action class
+	API.Action = function() {
+		return 0;
+	};
+
+	API.Action.prototype.constructor = API.Action;
+
+	// Animal class
+	API.Animal = function(type) {
+		this.type = type;
+	}
+
+	API.Animal.prototype.constructor = API.Animal;
+
+	API.Animal.prototype.getType = function() {
+		return this.type;
+	};
+
 	// Human class
 	API.Human = function(name) {
 		this.name = name;
@@ -42,6 +75,10 @@
 	// Human::getName
 	API.Human.prototype.getName = function() {
 		return this.name;
+	};
+
+	API.Human.prototype.put = function(object) {
+
 	};
 
 	// Human::interactWith
