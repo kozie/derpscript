@@ -1,0 +1,23 @@
+{
+  "name": "derpscript",
+  "version": "0.0.1",
+  "description": "DerpScript\r ==========",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnotherHerpDerp/derpscript.git"
+  },
+  "author": "secret",
+  "license": "none",
+  "bugs": {
+    "url": "https://github.com/AnotherHerpDerp/derpscript/issues"
+  },
+  "homepage": "https://github.com/AnotherHerpDerp/derpscript",
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "bower": "^1.3.8"
+  }
+}

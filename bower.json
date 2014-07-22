@@ -1,0 +1,25 @@
+{
+  "name": "derpscript",
+  "version": "0.0.1",
+  "homepage": "https://github.com/AnotherHerpDerp/derpscript",
+  "authors": [
+    "secret"
+  ],
+  "description": "Herp Derp?",
+  "main": "index.html",
+  "license": "none",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "codemirror": "~4.4.0",
+    "react": "~0.11.0",
+    "lodash": "~2.4.1"
+  }
+}
