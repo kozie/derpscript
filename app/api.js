@@ -105,7 +105,7 @@
 	};
 
 	API.Action.prototype.end = function() {
-		API.output(this.text);
+		API.output(this.text + '.');
 	};
 
 	// Animal class
@@ -116,7 +116,7 @@
 	API.Animal.prototype.constructor = API.Animal;
 
 	API.Animal.prototype.str = function() {
-		return this.type;
+		return this.type.toLowerCase();
 	};
 
 	// Human class

@@ -9,7 +9,7 @@
 	(function init() {
 		_editor = React.createClass({
 			render: function() {
-				return React.DOM.textarea({id: 'editor'}, '// Insert code here\n');
+				return React.DOM.textarea({id: 'editor'}, '# Insert code here\n');
 			},
 			componentDidMount: function() {
 				_editor = CodeMirror.fromTextArea(root.document.getElementById('editor'), {
