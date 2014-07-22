@@ -82,6 +82,14 @@
 		root.addEventListener('keyup', onChoice);
 	};
 
+	API.choice = function(name) {
+		if (name in _choices) {
+			return _choices[name];
+		}
+
+		return false;
+	};
+
 	// Output function to add output to buffer
 	API.output = function(str) {
 		_outputBuffer = _outputBuffer + str + "\n";
