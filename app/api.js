@@ -31,10 +31,13 @@
 		}
 	};
 
-	API.pressAnyKey = function(fn) {
+	API.pressAnyKey = function(fn, showText) {
+		if (showText === undefined) showText = true;
+
 		if (typeof fn != 'function') fn = function() {};
 
-		output("Press any key..");
+		if (showText) output("Press any key..");
+		
 		var onKeyDown = function(e) {
 			e.preventDefault();
 			root.removeEventListener('keyup', onKeyDown);
@@ -45,6 +48,10 @@
 
 		root.addEventListener('keyup', onKeyDown);
 	};
+
+	API.wait = function(fn) {
+		API.pressAnyKey(fn, false);
+	}
 
 	API.ask = function(question) {
 		return prompt(question);
