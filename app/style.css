@@ -4,6 +4,18 @@ html, body {
 
 .main {
 	margin-top: 1em;
+	position: absolute;
+	bottom: 0px;
+	top: 55px;
+	width: 100%;
+}
+
+.main .row {
+	height: 100%;
+}
+
+.editor-container {
+	height: 100%;
 }
 
 .editor-container .CodeMirror {
@@ -11,6 +23,7 @@ html, body {
 	height: 750px;
 	font-family: 'Source Code Pro', monospace;
 	font-weight: 300;
+	height: 99%;
 }
 
 .navbar-brand {
